@@ -25,6 +25,22 @@
                     @error('nama')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="col-12 col-md-6">
+                    <label for="nik" class="form-label">NIK</label>
+                    <input type="text" id="nik" name="nik" maxlength="16" inputmode="numeric"
+                           value="{{ old('nik', $peserta->nik) }}"
+                           class="form-control @error('nik') is-invalid @enderror" required>
+                    @error('nik')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+                <div class="col-12 col-md-6">
+                    <label for="jenis_kelamin" class="form-label">Jenis kelamin</label>
+                    <select id="jenis_kelamin" name="jenis_kelamin" class="form-select @error('jenis_kelamin') is-invalid @enderror" required>
+                        <option value="">Pilih jenis kelamin</option>
+                        <option value="L" @selected(old('jenis_kelamin', $peserta->jenis_kelamin) === 'L')>Laki-laki</option>
+                        <option value="P" @selected(old('jenis_kelamin', $peserta->jenis_kelamin) === 'P')>Perempuan</option>
+                    </select>
+                    @error('jenis_kelamin')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+                <div class="col-12 col-md-6">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" id="email" name="email" maxlength="150"
                            value="{{ old('email', $peserta->email) }}"

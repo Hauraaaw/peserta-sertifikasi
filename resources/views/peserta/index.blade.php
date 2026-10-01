@@ -8,7 +8,7 @@
             <form method="GET" action="{{ route('peserta.index') }}" class="row g-2 flex-grow-1">
                 <div class="col-12 col-sm">
                     <input type="search" name="q" value="{{ request('q') }}" class="form-control"
-                           placeholder="Cari nomor, nama, atau email" aria-label="Kata kunci pencarian">
+                           placeholder="Cari nomor, NIK, nama, atau email" aria-label="Kata kunci pencarian">
                 </div>
                 <div class="col-12 col-sm-auto">
                     <select name="skema_id" class="form-select" aria-label="Filter skema">
@@ -34,23 +34,41 @@
             <table class="table table-hover align-middle">
                 <thead>
                     <tr>
-                        <th>No</th><th>Nomor peserta</th><th>Nama</th><th>Skema</th><th>Email</th><th class="text-end">Aksi</th>
+                        <th>No</th>
+                        <th>Peserta</th>
+                        <th>Nomor peserta / NIK</th>
+                        <th>Jenis kelamin</th>
+                        <th>Skema</th>
+                        <th class="text-end">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                 @forelse ($pesertas as $p)
                     <tr>
                         <td>{{ $pesertas->firstItem() + $loop->index }}</td>
-                        <td>{{ $p->nomor_peserta }}</td>
-                        <td>{{ $p->nama }}</td>
+                        <td>
+                            <div class="fw-semibold">{{ $p->nama }}</div>
+                            <div class="small text-muted">{{ $p->email }}</div>
+                        </td>
+                        <td>
+                            <div class="fw-semibold">{{ $p->nomor_peserta }}</div>
+                            <div class="small text-muted">{{ $p->nik }}</div>
+                        </td>
+                        <td class="text-nowrap">{{ $p->jenis_kelamin === 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                         <td>{{ $p->skema->nama_skema }}</td>
-                        <td>{{ $p->email }}</td>
-                        <td class="text-end text-nowrap">
-                            <a href="{{ route('peserta.show', $p) }}" class="btn btn-sm btn-outline-primary">Detail</a>
-                            <a href="{{ route('peserta.edit', $p) }}" class="btn btn-sm btn-outline-warning">Ubah</a>
-                            <button type="button" class="btn btn-sm btn-outline-danger"
-                                    data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                    data-action="{{ route('peserta.destroy', $p) }}" data-name="{{ $p->nama }}">Hapus</button>
+                        <td class="text-end">
+                            <div class="d-inline-flex gap-1">
+                                <a href="{{ route('peserta.show', $p) }}" class="btn btn-sm btn-outline-primary"
+                                   title="Detail" aria-label="Detail"><i class="bi bi-eye"></i></a>
+                                <a href="{{ route('peserta.edit', $p) }}" class="btn btn-sm btn-outline-warning"
+                                   title="Ubah" aria-label="Ubah"><i class="bi bi-pencil"></i></a>
+                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                        title="Hapus" aria-label="Hapus"
+                                        data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                        data-action="{{ route('peserta.destroy', $p) }}" data-name="{{ $p->nama }}">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 @empty

@@ -23,6 +23,7 @@ abstract class BaseRequest extends FormRequest
             'before'   => ':attribute harus sebelum hari ini.',
             'regex'    => 'Format :attribute tidak valid.',
             'in'       => ':attribute yang dipilih tidak valid.',
+            'digits'   => ':attribute harus terdiri dari :digits digit angka.',
         ];
     }
 }

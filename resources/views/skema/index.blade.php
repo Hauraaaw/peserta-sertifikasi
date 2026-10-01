@@ -8,7 +8,7 @@
             <form method="GET" action="{{ route('skema.index') }}" class="row g-2 flex-grow-1">
                 <div class="col-12 col-sm">
                     <input type="search" name="q" value="{{ request('q') }}" class="form-control"
-                           placeholder="Cari kode, nama, atau jenis skema" aria-label="Kata kunci pencarian">
+                           placeholder="Cari kode atau nama skema" aria-label="Kata kunci pencarian">
                 </div>
                 <div class="col-12 col-sm-auto d-flex gap-2">
                     <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i> Cari</button>
@@ -26,7 +26,7 @@
             <table class="table table-hover align-middle">
                 <thead>
                     <tr>
-                        <th>No</th><th>Kode skema</th><th>Nama skema</th><th>Jenis</th><th>Jumlah peserta</th><th class="text-end">Aksi</th>
+                        <th>No</th><th>Kode skema</th><th>Nama skema</th><th>Jumlah peserta</th><th class="text-end">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,17 +35,22 @@
                         <td>{{ $skemas->firstItem() + $loop->index }}</td>
                         <td>{{ $s->kode_skema }}</td>
                         <td>{{ $s->nama_skema }}</td>
-                        <td>{{ $s->jenis }}</td>
                         <td>{{ $s->pesertas_count }}</td>
-                        <td class="text-end text-nowrap">
-                            <a href="{{ route('skema.edit', $s) }}" class="btn btn-sm btn-outline-warning">Ubah</a>
-                            <button type="button" class="btn btn-sm btn-outline-danger"
-                                    data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                    data-action="{{ route('skema.destroy', $s) }}" data-name="{{ $s->nama_skema }}">Hapus</button>
+                        <td class="text-end">
+                            <div class="d-inline-flex gap-1">
+                                <a href="{{ route('skema.edit', $s) }}" class="btn btn-sm btn-outline-warning"
+                                   title="Ubah" aria-label="Ubah"><i class="bi bi-pencil"></i></a>
+                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                        title="Hapus" aria-label="Hapus"
+                                        data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                        data-action="{{ route('skema.destroy', $s) }}" data-name="{{ $s->nama_skema }}">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 @empty
-                    <tr><td colspan="6" class="text-center text-muted py-4">Data skema tidak ditemukan.</td></tr>
+                    <tr><td colspan="5" class="text-center text-muted py-4">Data skema tidak ditemukan.</td></tr>
                 @endforelse
                 </tbody>
             </table>

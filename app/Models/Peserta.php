@@ -11,7 +11,7 @@ class Peserta extends Model
     protected $table = 'pesertas';
 
     protected $fillable = [
-        'nomor_peserta', 'nama', 'email', 'no_telepon',
+        'nomor_peserta', 'nik', 'nama', 'jenis_kelamin', 'email', 'no_telepon',
         'tanggal_lahir', 'alamat', 'skema_id',
     ];
 
@@ -22,12 +22,13 @@ class Peserta extends Model
         return $this->belongsTo(Skema::class, 'skema_id');
     }
 
-    /** Pencarian berdasarkan nomor peserta, nama, atau email. */
+    /** Pencarian berdasarkan nomor peserta, NIK, nama, atau email. */
     public function scopeCari(Builder $query, ?string $kata): Builder
     {
         return $query->when($kata, function (Builder $q) use ($kata) {
             $q->where(function (Builder $w) use ($kata) {
                 $w->where('nomor_peserta', 'like', "%{$kata}%")
+                  ->orWhere('nik', 'like', "%{$kata}%")
                   ->orWhere('nama', 'like', "%{$kata}%")
                   ->orWhere('email', 'like', "%{$kata}%");
             });

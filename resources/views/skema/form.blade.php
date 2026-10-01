@@ -24,22 +24,6 @@
                            class="form-control @error('nama_skema') is-invalid @enderror" required>
                     @error('nama_skema')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
-                <div class="col-12 col-md-4">
-                    <label for="jenis" class="form-label">Jenis skema</label>
-                    <select id="jenis" name="jenis" class="form-select @error('jenis') is-invalid @enderror" required>
-                        <option value="">Pilih jenis</option>
-                        @foreach (\App\Models\Skema::JENIS as $j)
-                            <option value="{{ $j }}" @selected(old('jenis', $skema->jenis) === $j)>{{ $j }}</option>
-                        @endforeach
-                    </select>
-                    @error('jenis')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                </div>
-                <div class="col-12">
-                    <label for="deskripsi" class="form-label">Deskripsi</label>
-                    <textarea id="deskripsi" name="deskripsi" rows="3" maxlength="1000"
-                              class="form-control @error('deskripsi') is-invalid @enderror">{{ old('deskripsi', $skema->deskripsi) }}</textarea>
-                    @error('deskripsi')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                </div>
             </div>
 
             <div class="mt-4 d-flex gap-2">

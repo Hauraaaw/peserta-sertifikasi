@@ -1,7 +1,7 @@
 # Aplikasi Pengelolaan Data Peserta Sertifikasi
 
 Laravel + PHP + MySQL + Blade + Bootstrap 5 (CDN) + CSS/JS custom.
-Folder ini berisi file aplikasi saja. Salin ke project Laravel 11/12 baru.
+Folder ini berisi file aplikasi saja. Salin ke project Laravel 11/12/13 baru.
 
 ## Instalasi
 
@@ -18,12 +18,17 @@ Folder ini berisi file aplikasi saja. Salin ke project Laravel 11/12 baru.
    DB_USERNAME=root
    DB_PASSWORD=
 5. Jalankan:
-   php artisan migrate --seed
+   php artisan migrate
+6. Buat akun admin (dummy) lewat tinker:
+   php artisan tinker
+   \App\Models\User::create(['name' => 'Administrator', 'email' => 'admin@example.test', 'password' => \Illuminate\Support\Facades\Hash::make('password')]);
+   exit
+7. Jalankan server:
    php artisan serve
-6. Buka http://127.0.0.1:8000
+8. Buka http://127.0.0.1:8000 lalu login.
 
-## Akun dummy
-Email: admin@example.test | Password: password
+## Urutan pengisian data
+Tambah dulu data skema (menu Data Skema), baru tambah data peserta.
 
 ## Library pre-existing
 - Laravel: routing, Eloquent ORM, validasi (Form Request), autentikasi session, migration

@@ -6,13 +6,16 @@
     <div class="card-body">
         <dl class="row detail-list mb-0">
             <dt class="col-sm-4 col-lg-3">Nomor peserta</dt><dd class="col-sm-8 col-lg-9">{{ $peserta->nomor_peserta }}</dd>
+            <dt class="col-sm-4 col-lg-3">NIK</dt><dd class="col-sm-8 col-lg-9">{{ $peserta->nik }}</dd>
             <dt class="col-sm-4 col-lg-3">Nama</dt><dd class="col-sm-8 col-lg-9">{{ $peserta->nama }}</dd>
+            <dt class="col-sm-4 col-lg-3">Jenis kelamin</dt>
+            <dd class="col-sm-8 col-lg-9">{{ $peserta->jenis_kelamin === 'L' ? 'Laki-laki' : 'Perempuan' }}</dd>
             <dt class="col-sm-4 col-lg-3">Email</dt><dd class="col-sm-8 col-lg-9">{{ $peserta->email }}</dd>
             <dt class="col-sm-4 col-lg-3">No. telepon</dt><dd class="col-sm-8 col-lg-9">{{ $peserta->no_telepon }}</dd>
             <dt class="col-sm-4 col-lg-3">Tanggal lahir</dt><dd class="col-sm-8 col-lg-9">{{ $peserta->tanggal_lahir->format('d/m/Y') }}</dd>
             <dt class="col-sm-4 col-lg-3">Alamat</dt><dd class="col-sm-8 col-lg-9">{{ $peserta->alamat }}</dd>
             <dt class="col-sm-4 col-lg-3">Skema sertifikasi</dt>
-            <dd class="col-sm-8 col-lg-9">{{ $peserta->skema->nama_skema }} ({{ $peserta->skema->kode_skema }}, {{ $peserta->skema->jenis }})</dd>
+            <dd class="col-sm-8 col-lg-9">{{ $peserta->skema->nama_skema }} ({{ $peserta->skema->kode_skema }})</dd>
         </dl>
         <div class="mt-4 d-flex gap-2">
             <a href="{{ route('peserta.edit', $peserta) }}" class="btn btn-warning">Ubah</a>
