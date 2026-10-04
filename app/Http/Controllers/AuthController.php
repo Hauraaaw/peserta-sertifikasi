@@ -26,7 +26,6 @@ class AuthController extends Controller
             'email'    => 'Email',
             'password' => 'Password',
         ]);
-
         if (! Auth::attempt($credentials)) {
             return back()
                 ->withInput($request->only('email'))
@@ -34,10 +33,8 @@ class AuthController extends Controller
         }
 
         $request->session()->regenerate();
-
         return redirect()->intended(route('dashboard'));
     }
-
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();

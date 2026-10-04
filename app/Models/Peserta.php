@@ -21,8 +21,6 @@ class Peserta extends Model
     {
         return $this->belongsTo(Skema::class, 'skema_id');
     }
-
-    /** Pencarian berdasarkan nomor peserta, NIK, nama, atau email. */
     public function scopeCari(Builder $query, ?string $kata): Builder
     {
         return $query->when($kata, function (Builder $q) use ($kata) {

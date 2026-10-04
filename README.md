@@ -9,7 +9,7 @@ Folder ini berisi file aplikasi saja. Salin ke project Laravel 11/12/13 baru.
    composer create-project laravel/laravel peserta-sertifikasi
 2. Salin semua isi folder ini ke dalam project tersebut, timpa file yang sudah ada
    (`routes/web.php`, `app/Providers/AppServiceProvider.php`, `database/seeders/DatabaseSeeder.php`).
-3. Buat database MySQL kosong, misalnya `peserta_sertifikasi`.
+3. Buat database MySQL kosong, misal `peserta_sertifikasi`.
 4. Ubah `.env`:
    DB_CONNECTION=mysql
    DB_HOST=127.0.0.1
@@ -21,7 +21,7 @@ Folder ini berisi file aplikasi saja. Salin ke project Laravel 11/12/13 baru.
    php artisan migrate
 6. Buat akun admin (dummy) lewat tinker:
    php artisan tinker
-   \App\Models\User::create(['name' => 'Administrator', 'email' => 'admin@example.test', 'password' => \Illuminate\Support\Facades\Hash::make('password')]);
+   \App\Models\User::create(['name' => 'Administrator', 'email' => 'admin@gmail.com', 'password' => \Illuminate\Support\Facades\Hash::make('password')]);
    exit
 7. Jalankan server:
    php artisan serve
