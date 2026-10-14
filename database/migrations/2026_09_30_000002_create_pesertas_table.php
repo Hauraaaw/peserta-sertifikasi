@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('nama', 150);
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('email', 150)->unique();
-            $table->string('no_telepon', 20);
+            $table->string('no_telepon', 13);
             $table->date('tanggal_lahir');
             $table->text('alamat');
             $table->foreignId('skema_id')->constrained('skemas')->restrictOnDelete();

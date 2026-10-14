@@ -17,8 +17,13 @@
             <dt class="col-sm-4 col-lg-3">Skema sertifikasi</dt>
             <dd class="col-sm-8 col-lg-9">{{ $peserta->skema->nama_skema }} ({{ $peserta->skema->kode_skema }})</dd>
         </dl>
+        
         <div class="mt-4 d-flex gap-2">
-            <a href="{{ route('peserta.edit', $peserta) }}" class="btn btn-warning">Ubah</a>
+            {{-- TOMBOL UBAH HANYA MUNCUL JIKA YANG LOGIN ADALAH ADMIN --}}
+            @if(auth()->check() && auth()->user()->role === 'admin')
+                <a href="{{ route('peserta.edit', $peserta) }}" class="btn btn-warning">Ubah</a>
+            @endif
+
             <a href="{{ route('peserta.index') }}" class="btn btn-outline-secondary">Kembali</a>
         </div>
     </div>

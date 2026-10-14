@@ -17,16 +17,26 @@
                     @endif
                 </div>
             </form>
-            <div>
-                <a href="{{ route('skema.create') }}" class="btn btn-success"><i class="bi bi-plus-lg"></i> Tambah skema</a>
-            </div>
+
+            {{-- TOMBOL TAMBAH SKEMA HANYA MUNCUL JIKA ADMIN --}}
+            @if(auth()->check() && auth()->user()->role === 'admin')
+                <div>
+                    <a href="{{ route('skema.create') }}" class="btn btn-success"><i class="bi bi-plus-lg"></i> Tambah skema</a>
+                </div>
+            @endif
         </div>
 
         <div class="table-responsive">
             <table class="table table-hover align-middle">
                 <thead>
                     <tr>
-                        <th>No</th><th>Kode skema</th><th>Nama skema</th><th>Jumlah peserta</th><th class="text-end">Aksi</th>
+                        <th>No</th>
+                        <th>Kode skema</th>
+                        <th>Nama skema</th>
+                        <th>Jumlah peserta</th>
+                        @if(auth()->check() && auth()->user()->role === 'admin')
+                            <th class="text-end">Aksi</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -36,21 +46,25 @@
                         <td>{{ $s->kode_skema }}</td>
                         <td>{{ $s->nama_skema }}</td>
                         <td>{{ $s->pesertas_count }}</td>
-                        <td class="text-end">
-                            <div class="d-inline-flex gap-1">
-                                <a href="{{ route('skema.edit', $s) }}" class="btn btn-sm btn-outline-warning"
-                                   title="Ubah" aria-label="Ubah"><i class="bi bi-pencil"></i></a>
-                                <button type="button" class="btn btn-sm btn-outline-danger"
-                                        title="Hapus" aria-label="Hapus"
-                                        data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                        data-action="{{ route('skema.destroy', $s) }}" data-name="{{ $s->nama_skema }}">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </div>
-                        </td>
+
+                        {{-- KOLOM AKSI HANYA MUNCUL JIKA ADMIN --}}
+                        @if(auth()->check() && auth()->user()->role === 'admin')
+                            <td class="text-end">
+                                <div class="d-inline-flex gap-1">
+                                    <a href="{{ route('skema.edit', $s) }}" class="btn btn-sm btn-outline-warning"
+                                       title="Ubah" aria-label="Ubah"><i class="bi bi-pencil"></i></a>
+                                    <button type="button" class="btn btn-sm btn-outline-danger"
+                                            title="Hapus" aria-label="Hapus"
+                                            data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                            data-action="{{ route('skema.destroy', $s) }}" data-name="{{ $s->nama_skema }}">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        @endif
                     </tr>
                 @empty
-                    <tr><td colspan="5" class="text-center text-muted py-4">Data skema tidak ditemukan.</td></tr>
+                    <tr><td colspan="{{ (auth()->check() && auth()->user()->role === 'admin') ? 5 : 4 }}" class="text-center text-muted py-4">Data skema tidak ditemukan.</td></tr>
                 @endforelse
                 </tbody>
             </table>

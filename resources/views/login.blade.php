@@ -31,6 +31,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Masuk</button>
             </form>
+            <a href="{{ route('beranda') }}" class="d-block text-center mt-3 small">Kembali ke beranda</a>
         </div>
     </div>
 </body>

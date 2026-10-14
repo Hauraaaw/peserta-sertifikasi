@@ -6,11 +6,15 @@ use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\SkemaController;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/login');
+Route::view('/', 'beranda')->name('beranda');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:10,1')->name('login.attempt');
+    
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'register'])->name('register.process');
+    
 });
 
 Route::middleware('auth')->group(function () {

@@ -153,3 +153,15 @@ a:hover { color: var(--color-primary); }
 .login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem; }
 .login-card { width: 100%; max-width: 420px; }
 .login-card h1 { color: var(--color-primary); font-weight: 700; }
+
+/* Beranda (sebelum login) */
+.welcome-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #ff6fb5 100%);
+}
+.welcome-card { width: 100%; max-width: 560px; text-align: center; }
+.welcome-title { font-size: 2.25rem; font-weight: 700; color: var(--color-primary); margin-bottom: .5rem; }

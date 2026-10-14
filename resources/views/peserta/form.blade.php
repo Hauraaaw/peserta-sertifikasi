@@ -49,9 +49,9 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <label for="no_telepon" class="form-label">No. telepon</label>
-                    <input type="text" id="no_telepon" name="no_telepon" maxlength="20"
-                           value="{{ old('no_telepon', $peserta->no_telepon) }}"
-                           class="form-control @error('no_telepon') is-invalid @enderror" required>
+                    <input type="text" id="no_telepon" name="no_telepon" maxlength="13"
+                        value="{{ old('no_telepon', $peserta->no_telepon) }}"
+                        class="form-control @error('no_telepon') is-invalid @enderror" required>
                     @error('no_telepon')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="col-12 col-md-6">

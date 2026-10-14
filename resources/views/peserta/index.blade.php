@@ -25,9 +25,13 @@
                     @endif
                 </div>
             </form>
-            <div>
-                <a href="{{ route('peserta.create') }}" class="btn btn-success"><i class="bi bi-plus-lg"></i> Tambah peserta</a>
-            </div>
+
+            {{-- TOMBOL TAMBAH HANYA MUNCUL JIKA ADMIN --}}
+            @if(auth()->check() && auth()->user()->role === 'admin')
+                <div>
+                    <a href="{{ route('peserta.create') }}" class="btn btn-success"><i class="bi bi-plus-lg"></i> Tambah peserta</a>
+                </div>
+            @endif
         </div>
 
         <div class="table-responsive">
@@ -58,16 +62,21 @@
                         <td>{{ $p->skema->nama_skema }}</td>
                         <td class="text-end">
                             <div class="d-inline-flex gap-1">
+                                {{-- TOMBOL DETAIL BISA DILIHAT SEMUA ORANG (USER & ADMIN) --}}
                                 <a href="{{ route('peserta.show', $p) }}" class="btn btn-sm btn-outline-primary"
                                    title="Detail" aria-label="Detail"><i class="bi bi-eye"></i></a>
-                                <a href="{{ route('peserta.edit', $p) }}" class="btn btn-sm btn-outline-warning"
-                                   title="Ubah" aria-label="Ubah"><i class="bi bi-pencil"></i></a>
-                                <button type="button" class="btn btn-sm btn-outline-danger"
-                                        title="Hapus" aria-label="Hapus"
-                                        data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                        data-action="{{ route('peserta.destroy', $p) }}" data-name="{{ $p->nama }}">
-                                    <i class="bi bi-trash"></i>
-                                </button>
+
+                                {{-- TOMBOL UBAH & HAPUS HANYA MUNCUL JIKA ADMIN --}}
+                                @if(auth()->check() && auth()->user()->role === 'admin')
+                                    <a href="{{ route('peserta.edit', $p) }}" class="btn btn-sm btn-outline-warning"
+                                       title="Ubah" aria-label="Ubah"><i class="bi bi-pencil"></i></a>
+                                    <button type="button" class="btn btn-sm btn-outline-danger"
+                                            title="Hapus" aria-label="Hapus"
+                                            data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                            data-action="{{ route('peserta.destroy', $p) }}" data-name="{{ $p->nama }}">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                @endif
                             </div>
                         </td>
                     </tr>
